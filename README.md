@@ -1,19 +1,58 @@
-# Australian Retail Customer Segmentation
-**Identified $47K high-value customer segment driving 15% of total revenue**
+# Australian Retail Customer Segmentation (Python + Power BI)
 
-## 🎯 Business Impact
-- **Revenue Optimization:** Discovered 106 loyal customers generating 15% of company revenue
-- **Marketing Efficiency:** Segmented 788 customers into 3 actionable groups for targeted campaigns  
-- **Data Quality:** Rescued 1,032 corrupted transaction records (72.5% of invalid order IDs)
+Customer segmentation using RFM features + K-Means clustering, packaged with a Power BI dashboard for interactive exploration.
 
-## 📊 Key Results
-| Customer Segment | Count | Avg. Revenue | Business Action |
-|---|---|---|---|
-| Loyal High-Value | 106 | $445 | Premium retention programs |
-| Occasional Buyers | 414 | $87 | Conversion campaigns |
-| Churned Customers | 268 | $32 | Re-engagement or write-off |
+---
 
-## 🛠️ Technical Implementation
-**Data Processing:** Python (Pandas, NumPy) - Cleaned 5,000 transaction dataset  
-**Analytics:** RFM Analysis, K-Means clustering (Scikit-learn)  
-**Visualization:** Power BI dashboard with interactive customer insights
+## What this repo contains
+- A full Python notebook workflow (cleaning → transaction integrity → RFM → clustering)
+- A Power BI dashboard built on the produced customer-level dataset
+- Cleaned CSV outputs used by Power BI
+
+---
+
+## Results (reproducible from `powerbi_enriched_data.csv`)
+- Customers: **788**
+- Total revenue: **$715,541.58**
+- Avg revenue per customer: **$908.05**
+
+### Cluster breakdown
+- Cluster 0: **414 customers**, **$397,421.44** (55.54%), avg **$959.96/customer**
+- Cluster 1: **106 customers**, **$113,668.90** (15.89%), avg **$1,072.35/customer**
+- Cluster 2: **268 customers**, **$204,451.24** (28.57%), avg **$762.88/customer**
+
+---
+
+## Data quality work (transaction integrity)
+The raw dataset re-used `order_no` inconsistently across key cart-level fields.  
+I validated order integrity using cart-level uniqueness checks and rebuilt transaction grouping:
+
+- Unique orders: **1,435**
+- Valid cart-consistent orders: **394**
+- Inconsistent orders: **1,041 / 1,435** (**72.54%**)
+- Rows tied to inconsistent orders: **4,597 / 5,000**
+
+This ensured Frequency and Monetary metrics were computed on stable transaction units.
+
+---
+
+## How to reproduce
+1) Run the notebook:
+   - `Australian Retail Customer Segmentation.ipynb`
+2) Open the Power BI dashboard:
+   - `Australian Retail Customer Segmentation.pbix`
+
+---
+
+## Files
+- `dataaus.csv` / `dataausclean.csv` — raw and cleaned transaction datasets
+- `rfm_*.csv` — intermediate and final clustering datasets
+- `powerbi_enriched_data.csv` — customer-level dataset used in Power BI
+- `Australian Retail Customer Segmentation.pbix` — dashboard
+- `cluster_insights.txt` — segment-level actions in plain English
+
+---
+
+## Review request
+Open an Issue titled: **Review: retail-customer-segmentation-australia**  
+I want feedback on dashboard layout, metric naming, and reproducibility clarity.

@@ -1,8 +1,33 @@
-Power BI Dashboard Setup:
-- Load 'powerbi_data.csv' as the main table.
-- Create visuals:
-  - Bar Chart: Cluster sizes (X: cluster, Y: count).
-  - Scatter Plot: Recency_norm vs. monetary_norm (color by cluster).
-  - Table: Customer_type distribution per cluster.
-- Filters: Add cluster and customer_type for interactivity.
-- Save as 'Retail_Customer_Segmentation.pbix'.
+Power BI Dashboard Setup (Australian Retail Customer Segmentation.pbix)
+
+1) Data source
+- Load: powerbi_enriched_data.csv
+- Ensure column types:
+  - customer_name: Text
+  - cluster: Whole number
+  - recency_norm / frequency_norm / monetary_norm: Decimal number
+  - order_total($): Decimal number
+  - state / customer_type / order_priority: Text
+
+2) Measures (recommended)
+- Total Revenue = SUM('powerbi_enriched_data'[order_total($)])
+- Customer Count = DISTINCTCOUNT('powerbi_enriched_data'[customer_name])
+- Avg Revenue per Customer = DIVIDE([Total Revenue], [Customer Count])
+
+3) Core visuals (matches the dataset)
+- Card: Avg Revenue per Customer
+- Card: Customer Count
+- Card: Total Revenue
+- Donut/Pie: Revenue Contribution by Cluster (Legend=cluster, Values=Total Revenue)
+- Bar: Customer Segments by Cluster (Axis=cluster, Values=Customer Count)
+- 100% Stacked Bar: Customer Type Distribution by Cluster (Axis=cluster, Legend=customer_type, Values=Customer Count)
+- Scatter: Customer Positioning by Recency & Spend (X=recency_norm, Y=monetary_norm, Legend=cluster)
+- Stacked Bar: Revenue by State (Axis=state, Values=Total Revenue, Legend=order_priority)
+- Table: Top Revenue-Generating Customers (customer_name, cluster, state, Total Revenue)
+
+4) Filters / slicers
+- Slicer: customer_type
+- Slicer: cluster
+
+5) Save file name
+- Australian Retail Customer Segmentation.pbix

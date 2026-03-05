@@ -1,12 +1,16 @@
-Cluster Summary (Corrected):
-         recency_norm  frequency_norm  monetary_norm customer_type
-cluster                                                           
-0               -0.57           -0.26          -0.30     Corporate
-1               -0.77            1.94           1.94   Home Office
-2                1.18           -0.47          -0.41     Corporate
+Cluster Summary (from powerbi_enriched_data.csv)
 
-Cluster Sizes:
-cluster
-0    399
-2    270
-1    119
+Customers and revenue:
+- Cluster 0: 414 customers | Total revenue $397,421.44 | Avg $959.96/customer | Revenue share 55.54%
+- Cluster 1: 106 customers | Total revenue $113,668.90 | Avg $1,072.35/customer | Revenue share 15.89%
+- Cluster 2: 268 customers | Total revenue $204,451.24 | Avg $762.88/customer | Revenue share 28.57%
+
+Average normalized signals (higher = more of that signal, relative scale):
+- Cluster 0: avg recency_norm = -0.57 | avg frequency_norm = -0.20 | avg monetary_norm = -0.24
+- Cluster 1: avg recency_norm = -0.75 | avg frequency_norm =  1.97 | avg monetary_norm =  1.81
+- Cluster 2: avg recency_norm =  1.18 | avg frequency_norm = -0.46 | avg monetary_norm = -0.34
+
+Most common attributes per cluster:
+- Cluster 0: customer_type = Corporate (146) | state = NSW (302) | order_priority = High (98)
+- Cluster 1: customer_type = Home Office (34) | state = NSW (79) | order_priority = Not Specified (23)
+- Cluster 2: customer_type = Corporate (98) | state = NSW (190) | order_priority = Not Specified (60)

@@ -1,11 +1,33 @@
-Cluster Insights:
-         recency_norm  frequency_norm  monetary_norm state order_priority  order_total($)
-cluster                                                                                  
-0               -0.57           -0.20          -0.24   NSW           High          959.96
-1               -0.75            1.97           1.81   NSW  Not Specified         1072.35
-2                1.18           -0.46          -0.34   NSW  Not Specified          762.88
+Cluster Insights (from powerbi_enriched_data.csv + powerbi_data.csv)
 
-Interpretations:
-- Cluster 0: Occasional buyers, mostly from [state], prioritize [priority], avg order $[value].
-- Cluster 1: Loyal high-value, mostly from [state], prioritize [priority], avg order $[value].
-- Cluster 2: Churned, mostly from [state], prioritize [priority], avg order $[value].
+How to read the normalized signals:
+- Lower recency_norm = more recent purchasing
+- Higher frequency_norm = buys more often
+- Higher monetary_norm = spends more (relative)
+
+Cluster 1 — Loyal / High-Value (106 customers)
+- Profile: Most recent (avg recency_norm -0.75), highest purchase frequency (avg frequency_norm 1.97), highest spend signal (avg monetary_norm 1.81)
+- Revenue: $113,668.90 (15.89%), avg $1,072.35/customer
+- Customer mix: Most common customer_type = Home Office (34)
+- Geography: Most common state = NSW (79)
+- Suggested action:
+  - Retention-first: loyalty perks, early access offers, bundle upgrades
+  - Reduce churn risk: proactive outreach for high-value accounts
+
+Cluster 0 — Active / Mid-Value (414 customers)
+- Profile: Recent-ish (avg recency_norm -0.57), moderate frequency (avg frequency_norm -0.20), moderate spend signal (avg monetary_norm -0.24)
+- Revenue: $397,421.44 (55.54%), avg $959.96/customer
+- Customer mix: Most common customer_type = Corporate (146)
+- Geography: Most common state = NSW (302)
+- Suggested action:
+  - Increase frequency: time-limited promos, cross-sell on common categories
+  - Improve conversion: targeted campaigns based on order_priority and customer_type
+
+Cluster 2 — Lapsed / Churned (268 customers)
+- Profile: Least recent (avg recency_norm 1.18), lowest frequency (avg frequency_norm -0.46), lower spend signal (avg monetary_norm -0.34)
+- Revenue: $204,451.24 (28.57%), avg $762.88/customer
+- Customer mix: Most common customer_type = Corporate (98)
+- Geography: Most common state = NSW (190)
+- Suggested action:
+  - Win-back: reactivation offers, “returning customer” incentives
+  - If reactivation cost is high: deprioritize and focus budget on Cluster 1 + Cluster 0
